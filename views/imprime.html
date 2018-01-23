@@ -1,0 +1,48 @@
+<h1 id="algo">1kh1</h1>
+<script>
+//var gui = require('nw.gui');
+//gui.Screen.Init(); // you only need to call this once
+
+function printToken(data) {
+	document.getElementById('algo').innerText = data;
+	let win = nw.Window.get().print({
+		printerName: 'Zebra TTP 2030',
+		preview: false,
+		headerString:'Ortopedicos',
+		footerString:'Ortopedicos' ,
+		autoprint: true
+	});	
+	window.close()
+}
+
+function positionate(x, y) {
+	nw.Window.get().moveTo(x, y)
+}
+
+function success_func(e) {
+ 	console.log("success_func ", e);
+}
+
+function fallback_func(e) {
+ 	console.log('fallback_func ', e)
+}
+
+function pantalla() {
+	gui.Screen.chooseDesktopMedia(["window","screen"], function(streamId) {
+    var vid_constraint = {
+      mandatory: {
+        chromeMediaSource: 'desktop', 
+        chromeMediaSourceId: streamId, 
+        maxWidth: 1920, 
+        maxHeight: 1080
+      }, 
+      optional: []
+    };
+    navigator.webkitGetUserMedia({audio: false, video: vid_constraint}, success_func, fallback_func);
+	})
+}
+
+window.pantalla = pantalla;
+window.positionate = positionate;
+window.printToken = printToken;
+</script>

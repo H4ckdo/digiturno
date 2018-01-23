@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DIGITURNO | PACK</title>
+</head>
+
+<body>
+  <div id="app"> </div>
+
+  <script src="./../assets/js/dependencies/sails.io.js" autoConnect="false"></script>
+  <script src="./../assets/js/dependencies/short-unique-id.min.js"></script>
+  <script src="./../src/js/menu.js"></script>
+  <script src="./../assets/js/pack.bundle.js" autoConnect="false"></script>
+  <script>   
+    const { spawn, exec } = require('child_process');
+
+    let start = spawn("node", [`app.js ${config.SADDRESS}`], {
+      shell: true
+    })
+    start.stdout.on('data', (data) => {
+      // console.log(`stdout: ${data}`);
+    });
+
+    start.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`);
+      if (data.includes("EADDRINUSE")) {
+        //alert("Ocurrio un error al iniciar la aplicacion, por favor reinicia el pack.");
+        window.loaderPopUp.modal.closePopUp();
+        window.failPopUp.modal.openPopUp();
+        return;
+      }
+      if (data.includes("EADDRNOTAVAIL")) {
+        window.loaderPopUp.modal.closePopUp();
+        window.wrongIpPopUp.modal.openPopUp();
+        return;
+      }
+
+      if (data.includes("LEVANTA")) {
+        io.sails.url = `http://${SADDRESS}:1337`;
+        window.client = io.sails.connect();
+        window.loaderPopUp.modal.closePopUp();      
+        /*
+        let TV = gui.Window.open('./views/tv.html', {
+          width: 625,
+          height: 230
+        })
+        */
+      }
+    });
+
+    start.on('error', error => {
+      console.log('error', error);
+    })
+
+    start.on('close', error => {
+      console.log(error, ' CLOSE');
+    })
+
+    win.on('close', function () {
+      let kill = exec("killall -9 node", (error, stdout, stderr) => {
+        if (error) {
+          console.log(`exec error: ${error}`);
+          return this.close(true);
+        }
+        this.close(true);
+      })
+    })
+  </script>
+
+</body>
+
+</html>
