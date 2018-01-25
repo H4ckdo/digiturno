@@ -5,6 +5,7 @@
 @import '../animations';
 @import '../fonts';
 @include foundation-global-styles;
+@include foundation-reveal;
 @include foundation-grid;
 
 body {

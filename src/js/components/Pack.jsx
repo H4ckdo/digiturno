@@ -177,9 +177,9 @@ export default class Pack extends React.Component {
             <div className="wrap-popup-info">
               <div>
                 <i className="material-icons icon-stop">pan_tool</i>
-                <h1 className="title-info">INFORMACION</h1>
+                <h1 className="title-info">INFORMACIÓN</h1>
               </div>
-              <p>En este momento no hay ningun recepcionista que pueda atender te.</p>
+              <p>En este momento no hay ningún recepcionista que pueda atender te.</p>
             </div>
           }
         />

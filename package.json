@@ -33,7 +33,7 @@
   },
   "scripts": {
     "lift": "node --inspect app.js",
-    "start": "echo $NW_SDK ./ --remote-debugging-port=9222 | bash",
+    "start": "./nw",
     "wrong-address": "echo $NW_SDK ./ --wrong-address | bash",
     "watch": "nodemon --watch ./src --exec 'npm run start' -e js,jsx,scss",
     "webpack:build": "./node_modules/.bin/webpack --progress --color --display-error-details --bail",

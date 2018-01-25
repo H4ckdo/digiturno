@@ -26,6 +26,7 @@ export default class PopUp extends React.Component {
   componentDidMount() {
     let modal = $(`#${this.props.id}`);
     this.modal = new Foundation.Reveal(modal);
+    console.log("ENTRA openPopUp ", this.props);
 
     if(this.props.full === true) {
       let modalBackground = this.modal.$element.find(".wrap-perspective").css("background")
@@ -41,13 +42,14 @@ export default class PopUp extends React.Component {
     if(this.props.startDisplayed === false) this.modal.close();
     this.modal.openPopUp = this.openPopUp.bind(this);
     this.modal.closePopUp = this.closePopUp.bind(this);
+
   }//end componentDidMount
 
   addChildren(name, child) {
     this.childrens[name] = child;
   }//end addChildren
 
-  openPopUp() {
+  openPopUp() {   
     let $reveal = this.modal.$element;
     const animation = this.props.animation;
     $reveal.parent().removeClass("disappear");

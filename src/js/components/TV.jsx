@@ -1,15 +1,12 @@
 //@ sourceMappingUR=/assets/js/tv.bundle.js.map
 import React from 'react';
+import $ from 'jquery';
 import '../../scss/components/TV.scss';
-import './../../../assets/js/dependencies/jquery-2.2.0.min.js';
 import './../../../assets/js/dependencies/slick/slick.js';
-
+import PopUp from './PopUp';
 import { copyCollection } from '../utils';
-//import $ from 'jquery';
 //import '../../../assets/js/dependencies/slick/slick.js';
 //const { SADDRESS } = require('../../../config/env/address.json');
-
-
 
 /**
 * Represent TV componnent class
@@ -29,7 +26,7 @@ export default class TV extends React.Component {
         slidesToScroll: -1
       }
     }
-  }//end constructor
+  }
 
   generateTemplate(data = []) {
     let result = data.map((element) => {
@@ -41,13 +38,13 @@ export default class TV extends React.Component {
       `
     })
     return result;
-  }//end genetate
+  }
 
+  /*
   componentDidMount() {
     let self = this;
-    this.SADDRESS = SADDRESS;
+    const SADDRESS = window.localStorage.getItem('SADDRESS');
     const sound = new Audio(`./../../../assets/audio/call.mp3`);
-
 
     io.sails.url = `http://${SADDRESS}:1337`;
     let client = io.sails.connect();
@@ -83,14 +80,17 @@ export default class TV extends React.Component {
       }
     })
 
-  }//end componentDidMount
+  }
+  */
 
   render() {
     return (
-      <div className="wrap-moduldos">
-        <ul className="wrap-tokens regular slider">
-
-        </ul>
+      <div>
+        <PopUp
+          id="testPopUp"
+          animation={"rebound"}
+          type="load"
+        />
       </div>
     )
   }//end render
